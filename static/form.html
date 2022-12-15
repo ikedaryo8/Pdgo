@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <link rel="icon" type="image/icon" href="./image/icon.ico">
+</head>
+<meta charset="UTF-8">
+<title>のっティバスきて</title>
+<meta name="description" content="文字登録">
+<link rel="stylesheet" href="./style5.css">
+
+<!-- <form action="#" method="post" name="contact-form">
+        <input type="text" name="moji">
+        <div class="button">
+            <a href="./index6.html">登録</a>
+        </div>
+    </form> -->
+
+<body>
+    <h1>のっティバスきて 予約</h1>
+    <form action="#" method="POST" name=""">
+        <table>
+            <tr>
+                <td>ユーザー名</td>
+                <td><input type=" text" name="User_name" placeholder="ユーザー名">
+        </td>
+        </tr>
+        <tr>
+            <td>メールアドレス</td>
+            <td><input type="text" name="mail" placeholder="メールアドレス"></td>
+        </tr>
+        <tr>
+            <td>年齢</td>
+            <td>
+                <select name="age">
+                    <option value="**">年齢</option>
+                    <option value="age10">10代未満</option>
+                    <option value="age20">20代</option>
+                    <option value="age30">30代</option>
+                    <option value="age40">40代</option>
+                    <option value="age50">50代</option>
+                    <option value="age60">60代</option>
+                    <option value="age70">70代</option>
+                    <option value="age80">80代</option>
+                    <option value="age90">90代</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>性別</td>
+            <td>
+                <select name="gender">
+                    <option value="**">選択してください</option>
+                    <option value="M">男性</option>
+                    <option value="F">女性</option>
+                    <option value="O">その他</option>
+                    <option value="N">無回答</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>年齢</td>
+            <td>
+                <select name="age">
+                    <option value="**">年齢</option>
+                    <option value="age10">10代未満</option>
+                    <option value="age20">20代</option>
+                    <option value="age30">30代</option>
+                    <option value="age40">40代</option>
+                    <option value="age50">50代</option>
+                    <option value="age60">60代</option>
+                    <option value="age70">70代</option>
+                    <option value="age80">80代</option>
+                    <option value="age90">90代</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>乗車するバス停</td>
+            <td>
+                <select name="board_bus_stop " value="{{board_bus_stop}}">
+                    <option value="**">乗車するバス停を選択してください.</option>
+                    <option value="01">01 フォルテ</option>
+                    <option value="02">02 太平寺</option>
+                    <option value="03">03 カレード</option>
+                    <option value="04">04 太平寺西</option>
+                    <option value="05">05 堀内東</option>
+                    <option value="06">06 堀内公民館</option>
+                    <option value="07">07 郷公民館</option>
+                    <option value="08">08 蓮華寺</option>
+                    <option value="09">09 南ヶ丘病院</option>
+                    <option value="10">10 明倫高校</option>
+                    <option value="11">11 下林郵便局</option>
+                    <option value="12">12 下林</option>
+                    <option value="13">13 位川</option>
+                    <option value="14">14 野々市市役所</option>
+                    <option value="15">15 三納</option>
+                    <option value="16">16 老人福祉センター</option>
+                    <option value="17">17 矢作</option>
+                    <option value="18">18 菅原団地</option>
+                    <option value="19">19 菅原小学校</option>
+                    <option value="20">20 菅原</option>
+                    <option value="21">21 住吉</option>
+                    <option value="22">22 すみよし公園</option>
+                    <option value="23">23 扇が丘</option>
+                    <option value="24">24 扇が丘東</option>
+                    <option value="25">25 工業大学東</option>
+                    <option value="26">26 金沢工業大学</option>
+                    <option value="27">27 高橋</option>
+                    <option value="28">28 工大駅前</option>
+                    <option value="29">29 カミーノ</option>
+                    <option value="30">30 喜多家住宅</option>
+                    <option value="31">31 本町4丁目</option>
+                    <option value="32">32 若松</option>
+                    <option value="33">33 フォルテ</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>降車するバス停</td>
+            <td>
+                <select name="get_off_bus_stop" value="{{get_off_bus_stop}}">
+                    <option value="**">降車するバス停を選択してください.</option>
+                    <option value="01">01 フォルテ</option>
+                    <option value="02">02 太平寺</option>
+                    <option value="03">03 カレード</option>
+                    <option value="04">04 太平寺西</option>
+                    <option value="05">05 堀内東</option>
+                    <option value="06">06 堀内公民館</option>
+                    <option value="07">07 郷公民館</option>
+                    <option value="08">08 蓮華寺</option>
+                    <option value="09">09 南ヶ丘病院</option>
+                    <option value="10">10 明倫高校</option>
+                    <option value="11">11 下林郵便局</option>
+                    <option value="12">12 下林</option>
+                    <option value="13">13 位川</option>
+                    <option value="14">14 野々市市役所</option>
+                    <option value="15">15 三納</option>
+                    <option value="16">16 老人福祉センター</option>
+                    <option value="17">17 矢作</option>
+                    <option value="18">18 菅原団地</option>
+                    <option value="19">19 菅原小学校</option>
+                    <option value="20">20 菅原</option>
+                    <option value="21">21 住吉</option>
+                    <option value="22">22 すみよし公園</option>
+                    <option value="23">23 扇が丘</option>
+                    <option value="24">24 扇が丘東</option>
+                    <option value="25">25 工業大学東</option>
+                    <option value="26">26 金沢工業大学</option>
+                    <option value="27">27 高橋</option>
+                    <option value="28">28 工大駅前</option>
+                    <option value="29">29 カミーノ</option>
+                    <option value="30">30 喜多家住宅</option>
+                    <option value="31">31 本町4丁目</option>
+                    <option value="32">32 若松</option>
+                    <option value="33">33 フォルテ</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="予約確定">
+            </td>
+        </tr>
+        </table>
+    </form>
+
+</body>
+
+</html>
