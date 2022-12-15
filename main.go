@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// フォームデータ用の構造体
 type FormData struct {
 	UserName    string
 	MailAddress string
@@ -29,7 +30,6 @@ func main() {
 	// フォーム送信
 	router.POST("/reservation", postForm)
 	router.Run(":8080")
-
 }
 
 func test(ctx *gin.Context) {
@@ -44,7 +44,6 @@ func getForm(ctx *gin.Context) {
 	ctx.HTML(200, "form.tmpl", gin.H{})
 }
 func postForm(ctx *gin.Context) {
-
 	var data FormData
 	data.UserName = ctx.PostForm("User_name")
 	data.MailAddress = ctx.PostForm("mail")
