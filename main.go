@@ -20,17 +20,14 @@ func main() {
 	router := gin.Default()
 	router.Static("/static", "./static") //" URL", 格納場所
 	router.LoadHTMLGlob("./static/*.tmpl")
-
-	router.GET("/dev", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"message": "hello world",
-		})
-	})
+	// 起動確認用
+	router.GET("/dev", test)
 	// トップページを表示
 	router.GET("/", getTopPage)
-
+	// 入力用フォームを表示
 	router.GET("/reservation", getForm)
-
+	// フォーム送信
+	router.POST("/reservation", postForm)
 	// router.POST("/sendform", func(c *gin.Context) {
 	// 	UserName := c.PostForm("User_name")
 	// 	UserMailAddress := c.PostForm("mail")
@@ -42,7 +39,12 @@ func main() {
 
 	// })
 	router.Run(":8080")
+}
 
+func test(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "hello world",
+	})
 }
 func getTopPage(ctx *gin.Context) {
 	ctx.HTML(200, "index.tmpl", gin.H{})
@@ -50,3 +52,16 @@ func getTopPage(ctx *gin.Context) {
 func getForm(ctx *gin.Context) {
 	ctx.HTML(200, "form.tmpl", gin.H{})
 }
+func postForm(ctx *gin.Context) {
+	//UserName := ctx.PostForm("User_name")
+	ctx.JSON(http.StatusOK, gin.H{
+		"name":     ctx.PostForm("User_name"),
+		"mail":     ctx.PostForm("mail"),
+		"age":    ctx.PostForm("age"),
+		"gender":    ctx.PostForm("gender"),
+		"onBusstop":  ctx.PostForm("board_bus_stop"),
+		"offBusstop": ctx.PostForm("get_off_bus_stop"),
+	})
+}
+
+func checkAnser 
