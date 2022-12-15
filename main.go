@@ -2,7 +2,6 @@ package main
 
 import (
 	//"net/http"
-
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -27,16 +26,12 @@ func main() {
 			"message": "hello world",
 		})
 	})
-	//
-	router.GET("/", func(ctx *gin.Context) {
-		ctx.HTML(200, "index.tmpl", gin.H{})
-	})
-	router.GET("/reservation", func(ctx *gin.Context) {
-		ctx.HTML(200, "form.tmpl", gin.H{})
+	// トップページを表示
+	router.GET("/", getTopPage)
 
-	})
+	router.GET("/reservation", getForm)
 
-	// router.POST("/send", func(c *gin.Context) {
+	// router.POST("/sendform", func(c *gin.Context) {
 	// 	UserName := c.PostForm("User_name")
 	// 	UserMailAddress := c.PostForm("mail")
 	// 	UserAge := c.PostForm("age")
@@ -48,4 +43,10 @@ func main() {
 	// })
 	router.Run(":8080")
 
+}
+func getTopPage(ctx *gin.Context) {
+	ctx.HTML(200, "index.tmpl", gin.H{})
+}
+func getForm(ctx *gin.Context) {
+	ctx.HTML(200, "form.tmpl", gin.H{})
 }
