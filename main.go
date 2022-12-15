@@ -1,7 +1,6 @@
 package main
 
 import (
-	//"net/http"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -55,13 +54,19 @@ func getForm(ctx *gin.Context) {
 func postForm(ctx *gin.Context) {
 	//UserName := ctx.PostForm("User_name")
 	ctx.JSON(http.StatusOK, gin.H{
-		"name":     ctx.PostForm("User_name"),
-		"mail":     ctx.PostForm("mail"),
-		"age":    ctx.PostForm("age"),
-		"gender":    ctx.PostForm("gender"),
+		"name":       ctx.PostForm("User_name"),
+		"mail":       ctx.PostForm("mail"),
+		"age":        ctx.PostForm("age"),
+		"gender":     ctx.PostForm("gender"),
 		"onBusstop":  ctx.PostForm("board_bus_stop"),
 		"offBusstop": ctx.PostForm("get_off_bus_stop"),
+		"isNeedHelp": ctx.PostForm("isNeedHelp"),
 	})
+	checkAnser()
 }
 
-func checkAnser 
+func checkAnser() {
+	// 空の値はないか
+	// バス停の重複はないか
+	//
+}
