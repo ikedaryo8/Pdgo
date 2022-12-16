@@ -6,17 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// フォームデータ用の構造体 → 一旦mapでの実装を試みる
-// type FormData struct {
-// 	UserName    string
-// 	MailAddress string
-// 	Age         string
-// 	Gender      string
-// 	OnBusstop   string
-// 	OffBusstop  string
-// 	isNeedHelp  string
-// }
-
 func main() {
 	router := gin.Default()
 	router.Static("/static", "./static") //" URL", 格納場所
@@ -60,9 +49,17 @@ func postForm(ctx *gin.Context) {
 
 	// 乗降バス停の重複を弾く
 	flag_selectSameBusstop := isNotDuplicat(formData["OnBusstop"], formData["OffBusstop"])
-	flag_hasNull := true // isNotNull(dataList)
+	flag_DataNotNull := true
+	for key := range formData {
+		flag_DataNotNull = flag_DataNotNull && isNotNull(formData[key])
+	}
 
-	if flag_selectSameBusstop && flag_hasNull {
+	flag := flag_selectSameBusstop && flag_DataNotNull
+	if flag_selectSameBusstop {
+		ctx.HTML(200, "form.tmpl", gin.H{
+			"message": "同じ名前のバス停を指定することはできません.",
+		})
+	} else if flag {
 		ctx.HTML(200, "form.tmpl", gin.H{
 			"message": "値が不正です",
 		})
@@ -82,7 +79,10 @@ func isNotDuplicat(on string, off string) bool {
 	return on == off
 }
 
-func isNotNull(data []string) bool {
-
-	return true
+func isNotNull(data string) bool {
+	ans := true
+	if data == " " {
+		ans = false
+	}
+	return ans
 }
