@@ -6,16 +6,16 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// フォームデータ用の構造体
-type FormData struct {
-	UserName    string
-	MailAddress string
-	Age         string
-	Gender      string
-	OnBusstop   string
-	OffBusstop  string
-	isNeedHelp  string
-}
+// フォームデータ用の構造体 → 一旦mapでの実装を試みる
+// type FormData struct {
+// 	UserName    string
+// 	MailAddress string
+// 	Age         string
+// 	Gender      string
+// 	OnBusstop   string
+// 	OffBusstop  string
+// 	isNeedHelp  string
+// }
 
 func main() {
 	router := gin.Default()
@@ -41,33 +41,48 @@ func getTopPage(ctx *gin.Context) {
 	ctx.HTML(200, "index.tmpl", gin.H{})
 }
 func getForm(ctx *gin.Context) {
-	ctx.HTML(200, "form.tmpl", gin.H{})
+	ctx.HTML(200, "form.tmpl", gin.H{
+		"message": "フォームを入力してください",
+	})
 }
+
+// https://ashitani.jp/golangtips/tips_map.html#map_Map
 func postForm(ctx *gin.Context) {
-	var data FormData
-	data.UserName = ctx.PostForm("User_name")
-	data.MailAddress = ctx.PostForm("mail")
-	data.Age = ctx.PostForm("age")
-	data.Gender = ctx.PostForm("gender")
-	data.OnBusstop = ctx.PostForm("board_bus_stop")
-	data.OffBusstop = ctx.PostForm("get_off_bus_stop")
-	data.isNeedHelp = ctx.PostForm("isNeedHelp")
+	formData := map[string]string{
+		"UserName":    ctx.PostForm("User_name"),
+		"MailAddress": ctx.PostForm("mail"),
+		"Age":         ctx.PostForm("age"),
+		"Gender":      ctx.PostForm("gender"),
+		"OnBusstop":   ctx.PostForm("board_bus_stop"),
+		"OffBusstop":  ctx.PostForm("get_off_bus_stop"),
+		"isNeedHelp":  ctx.PostForm("isNeedHelp"),
+	}
 
 	// 乗降バス停の重複を弾く
-	if checkAnser(data.OnBusstop, data.OffBusstop) {
-		ctx.HTML(200, "form.tmpl", gin.H{})
+	flag_selectSameBusstop := isNotDuplicat(formData["OnBusstop"], formData["OffBusstop"])
+	flag_hasNull := true // isNotNull(dataList)
+
+	if flag_selectSameBusstop && flag_hasNull {
+		ctx.HTML(200, "form.tmpl", gin.H{
+			"message": "値が不正です",
+		})
 
 	} else {
 		ctx.HTML(200, "result.tmpl",
 			gin.H{
-				"User_name":        data.UserName,
-				"board_bus_stop":   data.OnBusstop,
-				"get_off_bus_stop": data.OffBusstop,
-				"isNeedHelp":       data.isNeedHelp,
+				"User_name":        formData["UserName"],
+				"board_bus_stop":   formData["OnBusstop"],
+				"get_off_bus_stop": formData["OffBusstop"],
+				"isNeedHelp":       formData["isNeedHelp"],
 			})
 	}
 }
 
-func checkAnser(on string, off string) bool {
+func isNotDuplicat(on string, off string) bool {
 	return on == off
+}
+
+func isNotNull(data []string) bool {
+
+	return true
 }
