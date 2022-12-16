@@ -1,12 +1,42 @@
-body {
-    margin: 0 auto
+p {
+    margin: 0 auto;
+    font-weight: 700;
+    color: #e5364e;
+    font-size: 20px;
+}
+
+h1 {
+    color: black;
+    background-color: #f6d298;
+    width: 2000px;
+    height: 60px;
+    font-size: 38px;
+    font-family: serif, 'arial black';
+}
+
+td {
+    color: navy;
 }
 
 a {
-    color: #0F0;
+    color: blue;
 }
 
 .page-title {
-    color: #00F;
+    color: white;
+    font-size: 38px;
+    font-family: serif, 'arial black';
+}
 
+h2 {
+    color: black;
+}
+
+b {
+    color: navy;
+    font-size: 30px;
+}
+
+h3 {
+    color: black;
 }
