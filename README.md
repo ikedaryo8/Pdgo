@@ -1,2 +1,0 @@
-# Calligrabbit
-DMM Hackathon

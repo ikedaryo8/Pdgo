@@ -21,22 +21,30 @@ func main() {
 	router.Run(":8080")
 }
 
+/* ルーティング設定 */
+// 接続テスト用
 func test(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "hello world",
 	})
 }
+
+// TOPページ
 func getTopPage(ctx *gin.Context) {
 	ctx.HTML(200, "index.tmpl", gin.H{})
 }
+
+// フォーム表示
 func getForm(ctx *gin.Context) {
 	ctx.HTML(200, "form.tmpl", gin.H{
 		"message": "フォームを入力してください",
 	})
 }
 
-// https://ashitani.jp/golangtips/tips_map.html#map_Map
+// フォームが送信され
 func postForm(ctx *gin.Context) {
+	// フォームのデータをmap形式で扱う.
+	// https://ashitani.jp/golangtips/tips_map.html#map_Map
 	formData := map[string]string{
 		"UserName":    ctx.PostForm("User_name"),
 		"MailAddress": ctx.PostForm("mail"),
@@ -55,15 +63,17 @@ func postForm(ctx *gin.Context) {
 	}
 
 	flag := flag_selectSameBusstop && flag_DataNotNull
-	if flag_selectSameBusstop {
+	// 出力するものを判定
+	//未入力フォームがある場合-> エラーメッセージ
+	if flag { //未入力フォームを弾く
+		ctx.HTML(200, "form.tmpl", gin.H{
+			"message": "未入力フォームがあります",
+		})
+		//乗降バス停に同じバスを指定した場合-> エラーメッセージ
+	} else if flag_selectSameBusstop {
 		ctx.HTML(200, "form.tmpl", gin.H{
 			"message": "同じ名前のバス停を指定することはできません.",
 		})
-	} else if flag {
-		ctx.HTML(200, "form.tmpl", gin.H{
-			"message": "値が不正です",
-		})
-
 	} else {
 		ctx.HTML(200, "result.tmpl",
 			gin.H{
@@ -72,13 +82,18 @@ func postForm(ctx *gin.Context) {
 				"get_off_bus_stop": formData["OffBusstop"],
 				"isNeedHelp":       formData["isNeedHelp"],
 			})
+		// ユーザーへメール送信
+		// csvファイルに書き込む
 	}
 }
 
+/* 入力判定関数 */
+// バス停の重複を弾く
 func isNotDuplicat(on string, off string) bool {
 	return on == off
 }
 
+// 空の入力を弾く
 func isNotNull(data string) bool {
 	ans := true
 	if data == " " {
